@@ -8,4 +8,8 @@ class Cell {
     fun isLive(): Boolean {
         return state==LIVE
     }
+
+    fun makeLive() {
+        state=LIVE
+    }
 }

@@ -18,6 +18,16 @@ class CellTest {
     }
 
 
+    @Test
+    fun `should set the cell state to live`() {
+        val cell = Cell()
+
+        cell.makeLive()
+
+        assertEquals(true, cell.isLive())
+    }
+
+
 
 
 }
