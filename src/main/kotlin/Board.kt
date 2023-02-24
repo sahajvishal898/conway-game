@@ -1,6 +1,6 @@
 class Board(rowCnt: Int, colCnt: Int) {
 
-    private val grid = ArrayList<ArrayList<Cell>>()
+    private var grid = ArrayList<ArrayList<Cell>>()
 
     init {
         for (rowNo in 1..rowCnt) {
@@ -26,15 +26,13 @@ class Board(rowCnt: Int, colCnt: Int) {
     }
 
     private fun isRowAndColInvalid(rowNo: Int, colNo: Int): Boolean {
-        if (rowNo >= getRowsCnt() || colNo >= getColsCnt())
-            return true
+        if (rowNo >= getRowsCnt() || colNo >= getColsCnt() || rowNo < 0 || colNo < 0) return true
         return false
     }
 
     fun setCellStateLive(rowNo: Int, colNo: Int): Boolean? {
 
-        if (isRowAndColInvalid(rowNo, colNo))
-            return null
+        if (isRowAndColInvalid(rowNo, colNo)) return null
 
         val cell = getCell(rowNo, colNo)
         cell.makeLive()
@@ -43,8 +41,7 @@ class Board(rowCnt: Int, colCnt: Int) {
 
     fun getCellState(rowNo: Int, colNo: Int): Boolean? {
 
-        if (isRowAndColInvalid(rowNo, colNo))
-            return null
+        if (isRowAndColInvalid(rowNo, colNo)) return null
 
         return getCell(rowNo, colNo).isLive()
 
@@ -52,8 +49,7 @@ class Board(rowCnt: Int, colCnt: Int) {
 
     fun setCellStateDead(rowNo: Int, colNo: Int): Boolean? {
 
-        if (isRowAndColInvalid(rowNo, colNo))
-            return null
+        if (isRowAndColInvalid(rowNo, colNo)) return null
 
         val cell = getCell(rowNo, colNo)
         cell.makeDead()
@@ -62,8 +58,7 @@ class Board(rowCnt: Int, colCnt: Int) {
 
     fun liveNeighbourCells(rowNo: Int, colNo: Int): Int? {
 
-        if (isRowAndColInvalid(rowNo, colNo))
-            return null
+        if (isRowAndColInvalid(rowNo, colNo)) return null
 
 
         val rowChange = arrayListOf(-1, -1, -1, 0, 0, 1, 1, 1)
@@ -87,11 +82,40 @@ class Board(rowCnt: Int, colCnt: Int) {
     }
 
     fun deadNeighbourCells(rowNo: Int, colNo: Int): Int? {
-        if (isRowAndColInvalid(rowNo, colNo))
-            return null
+        if (isRowAndColInvalid(rowNo, colNo)) return null
 
         return TOTAL_NEIGHBOUR_CELLS - liveNeighbourCells(rowNo, colNo)!!
     }
 
+    fun updateGeneration() {
 
+        val newGrid = ArrayList<ArrayList<Cell>>()
+
+
+        for (rowNo in 1..getRowsCnt()) {
+
+            val currRow = ArrayList<Cell>()
+
+            for (colNo in 1..getColsCnt()) {
+
+                val cell = Cell()
+                val liveNeighbourCnt = liveNeighbourCells(rowNo - 1, colNo - 1)
+
+
+                if (getCell(rowNo - 1, colNo - 1).isLive()) {
+
+                    if (liveNeighbourCnt == 2 || liveNeighbourCnt == 3) {
+                        cell.makeLive()
+                    }
+                } else {
+                    if (liveNeighbourCnt == 3) {
+                        cell.makeLive()
+                    }
+                }
+                currRow.add(cell)
+            }
+            newGrid.add(currRow)
+        }
+        grid = newGrid
+    }
 }

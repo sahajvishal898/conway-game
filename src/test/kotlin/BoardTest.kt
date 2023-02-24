@@ -65,4 +65,34 @@ class BoardTest {
         assertEquals(8, deadCellCnt)
     }
 
+    @Test
+    fun `should check if board is updated`() {
+        val board = Board(5, 5)
+        val board2 = Board(5, 5)
+
+        board.setCellStateLive(1, 0)
+        board.setCellStateLive(1, 1)
+        board.setCellStateLive(1, 2)
+        board.setCellStateLive(2, 1)
+
+
+        board2.setCellStateLive(0, 1)
+        board2.setCellStateLive(1, 0)
+        board2.setCellStateLive(1, 1)
+        board2.setCellStateLive(1, 2)
+
+        board2.setCellStateLive(2, 0)
+        board2.setCellStateLive(2, 1)
+        board2.setCellStateLive(2, 2)
+
+
+        board.updateGeneration()
+
+        for (rowNo in 1..board.getRowsCnt()) {
+            for (colNo in 1..board.getColsCnt()) {
+                assertEquals(board.getCellState(rowNo - 1, colNo - 1), board2.getCellState(rowNo - 1, colNo - 1))
+            }
+        }
+    }
+
 }
