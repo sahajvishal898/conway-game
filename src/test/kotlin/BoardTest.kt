@@ -13,4 +13,16 @@ class BoardTest{
         assertEquals(5,board.getColsCnt())
     }
 
+    @Test
+    fun `should set cell of board to live`(){
+        val board=Board(5,5)
+
+        val isStateChanged=board.setCellStateLive(3,3)
+
+        assertEquals(true,isStateChanged)
+        assertEquals(LIVE,board.getCellState(3,3))
+
+    }
+
+
 }
