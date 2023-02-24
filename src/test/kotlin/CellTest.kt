@@ -10,6 +10,13 @@ class CellTest {
         assertEquals(true, cell.isDead())
     }
 
+    @Test
+    fun `should return false if cell state as live`() {
+        val cell = Cell()
+
+        assertEquals(false, cell.isLive())
+    }
+
 
 
 

@@ -4,4 +4,8 @@ class Cell {
     fun isDead(): Boolean {
         return state == DEAD
     }
+
+    fun isLive(): Boolean {
+        return state==LIVE
+    }
 }
