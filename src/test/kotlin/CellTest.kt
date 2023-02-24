@@ -11,7 +11,7 @@ class CellTest {
     }
 
     @Test
-    fun `should return false if cell state as live`() {
+    fun `should return false if cell state is live`() {
         val cell = Cell()
 
         assertEquals(false, cell.isLive())
@@ -35,8 +35,4 @@ class CellTest {
 
         assertEquals(true, cell.isDead())
     }
-
-
-
-
 }
