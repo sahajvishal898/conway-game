@@ -1,28 +1,38 @@
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class BoardTest{
+class BoardTest {
 
     @Test
-    fun `should return correct rowCnt and colCnt`(){
+    fun `should return correct rowCnt and colCnt`() {
 
-        val board=Board(5,5)
+        val board = Board(5, 5)
 
 
-        assertEquals(5,board.getRowsCnt())
-        assertEquals(5,board.getColsCnt())
+        assertEquals(5, board.getRowsCnt())
+        assertEquals(5, board.getColsCnt())
     }
 
     @Test
-    fun `should set cell of board to live`(){
-        val board=Board(5,5)
+    fun `should set cell of board to live`() {
+        val board = Board(5, 5)
 
-        val isStateChanged=board.setCellStateLive(3,3)
+        val isStateChanged = board.setCellStateLive(3, 3)
 
-        assertEquals(true,isStateChanged)
-        assertEquals(LIVE,board.getCellState(3,3))
+        assertEquals(true, isStateChanged)
+        assertEquals(LIVE, board.getCellState(3, 3))
 
     }
 
+    @Test
+    fun `should set cell of board to dead`() {
+        val board = Board(5, 5)
+
+        val isStateChanged = board.setCellStateDead(3, 3)
+
+        assertEquals(true, isStateChanged)
+        assertEquals(DEAD, board.getCellState(3, 3))
+
+    }
 
 }

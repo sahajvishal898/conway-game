@@ -1,11 +1,11 @@
-class Board(val rowCnt : Int, val colCnt: Int) {
+class Board(rowCnt: Int, colCnt: Int) {
 
-    val grid=ArrayList<ArrayList<Cell>>()
+    private val grid = ArrayList<ArrayList<Cell>>()
 
-    init{
-        for(rowNo in 1..rowCnt){
-            val currRow=ArrayList<Cell>()
-            for(colNo in 1..colCnt){
+    init {
+        for (rowNo in 1..rowCnt) {
+            val currRow = ArrayList<Cell>()
+            for (colNo in 1..colCnt) {
                 currRow.add(Cell())
             }
             grid.add(currRow)
@@ -25,29 +25,39 @@ class Board(val rowCnt : Int, val colCnt: Int) {
         return grid[rowNo][colNo]
     }
 
-    private fun isRowAndColInvalid(rowNo: Int, colNo:Int): Boolean {
-        if(rowNo>=getRowsCnt() || colNo>=getColsCnt())
+    private fun isRowAndColInvalid(rowNo: Int, colNo: Int): Boolean {
+        if (rowNo >= getRowsCnt() || colNo >= getColsCnt())
             return true
         return false
     }
 
     fun setCellStateLive(rowNo: Int, colNo: Int): Boolean? {
 
-        if(isRowAndColInvalid(rowNo,colNo))
+        if (isRowAndColInvalid(rowNo, colNo))
             return null
 
-        val cell = getCell(rowNo,colNo)
+        val cell = getCell(rowNo, colNo)
         cell.makeLive()
         return true
     }
 
     fun getCellState(rowNo: Int, colNo: Int): Boolean? {
 
-        if(isRowAndColInvalid(rowNo,colNo))
+        if (isRowAndColInvalid(rowNo, colNo))
             return null
 
-        return getCell(rowNo,colNo).isLive()
+        return getCell(rowNo, colNo).isLive()
 
+    }
+
+    fun setCellStateDead(rowNo: Int, colNo: Int): Boolean? {
+
+        if (isRowAndColInvalid(rowNo, colNo))
+            return null
+
+        val cell = getCell(rowNo, colNo)
+        cell.makeDead()
+        return true
     }
 
 
