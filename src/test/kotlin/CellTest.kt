@@ -27,6 +27,15 @@ class CellTest {
         assertEquals(true, cell.isLive())
     }
 
+    @Test
+    fun `should set the cell state to dead`() {
+        val cell = Cell()
+
+        cell.makeDead()
+
+        assertEquals(true, cell.isDead())
+    }
+
 
 
 

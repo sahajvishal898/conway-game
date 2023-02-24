@@ -12,4 +12,8 @@ class Cell {
     fun makeLive() {
         state=LIVE
     }
+
+    fun makeDead() {
+        state=DEAD
+    }
 }
