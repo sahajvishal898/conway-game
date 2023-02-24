@@ -60,5 +60,31 @@ class Board(rowCnt: Int, colCnt: Int) {
         return true
     }
 
+    fun liveNeighbourCell(rowNo: Int, colNo: Int): Int? {
+
+        if (isRowAndColInvalid(rowNo, colNo))
+            return null
+
+
+        val rowChange = arrayListOf(-1, -1, -1, 0, 0, 1, 1, 1)
+        val colChange = arrayListOf(-1, 0, 1, -1, 1, -1, 1, 1)
+
+        var liveCellsCnt = 0
+        for (index in 1..8) {
+
+            val currRow = rowNo + rowChange[index - 1]
+            val currCol = colNo + colChange[index - 1]
+
+            if (isRowAndColInvalid(currRow, currCol)) {
+                continue
+            }
+
+            if (getCellState(currRow, currCol) == LIVE) {
+                liveCellsCnt++
+            }
+        }
+        return liveCellsCnt
+    }
+
 
 }

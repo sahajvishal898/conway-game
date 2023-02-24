@@ -35,4 +35,25 @@ class BoardTest {
 
     }
 
+    @Test
+    fun `should return number of live cell on side of given cell`() {
+        val board = Board(5, 5)
+
+        val liveCellCnt = board.liveNeighbourCell(3, 3)
+
+        assertEquals(0, liveCellCnt)
+    }
+
+    @Test
+    fun `should return number of live cell on side of given cell as 2`() {
+        val board = Board(5, 5)
+        board.setCellStateLive(3, 3)
+        board.setCellStateLive(3, 4)
+
+
+        val liveCellCnt = board.liveNeighbourCell(4, 4)
+
+        assertEquals(2, liveCellCnt)
+    }
+
 }
