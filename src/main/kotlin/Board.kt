@@ -60,7 +60,7 @@ class Board(rowCnt: Int, colCnt: Int) {
         return true
     }
 
-    fun liveNeighbourCell(rowNo: Int, colNo: Int): Int? {
+    fun liveNeighbourCells(rowNo: Int, colNo: Int): Int? {
 
         if (isRowAndColInvalid(rowNo, colNo))
             return null
@@ -84,6 +84,13 @@ class Board(rowCnt: Int, colCnt: Int) {
             }
         }
         return liveCellsCnt
+    }
+
+    fun deadNeighbourCells(rowNo: Int, colNo: Int): Int? {
+        if (isRowAndColInvalid(rowNo, colNo))
+            return null
+
+        return TOTAL_NEIGHBOUR_CELLS - liveNeighbourCells(rowNo, colNo)!!
     }
 
 
