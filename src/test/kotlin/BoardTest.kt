@@ -88,11 +88,8 @@ class BoardTest {
 
         board.updateGeneration()
 
-        for (rowNo in 1..board.getRowsCnt()) {
-            for (colNo in 1..board.getColsCnt()) {
-                assertEquals(board.getCellState(rowNo - 1, colNo - 1), board2.getCellState(rowNo - 1, colNo - 1))
-            }
-        }
+        assertEquals(board.getGeneration(), board2.getGeneration())
+
     }
 
 }

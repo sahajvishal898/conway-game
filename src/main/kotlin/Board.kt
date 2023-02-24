@@ -118,4 +118,10 @@ class Board(rowCnt: Int, colCnt: Int) {
         }
         grid = newGrid
     }
+
+    fun getGeneration(): ArrayList<ArrayList<Cell>> {
+        return grid
+    }
+
+
 }
